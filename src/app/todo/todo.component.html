@@ -1,0 +1,30 @@
+<section class="py-5" id="todoSection">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <form [formGroup]="todoForm" (ngSubmit)="onSubmit(todoForm.value)">
+          <div class="input-group input-group-lg">
+            <label for="todoItem"></label>
+            <div class="input-group-prepend">
+              <span class="input-group-text">Item</span>
+            </div>
+            <input type="text" class="form-control" id="todoItem" formControlName="item">
+          </div>
+        </form>
+        <div class="d-flex justify-content-between" *ngFor="let items of todoList; let i = index">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="item{{items.item}}"
+              (change)="checkboxCheck($event, i)">
+            <label for="item{{items.item}}" class="custom-control-label">
+              <del *ngIf="items.isChecked">{{items.item}}</del>
+              <span *ngIf="!items.isChecked">{{items.item}}</span>
+            </label>
+          </div>
+          <div>
+            <i class="fas fa-times" (click)="delete(i)"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
